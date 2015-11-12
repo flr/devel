@@ -1,10 +1,11 @@
 # FLCLASS.R - DESC
 # /R/FLCLASS.R
 
+# Copyright %USER%, %YEAR%
+# Author: %USER% <%EMAIL%>
+#
+# Distributed under the terms of the %LICENSE%
 # Copyright 2003-2014 FLR Team. Distributed under the GPL 2 or later
-# Maintainer: FLR Team <flr-team@flr-project.org>
-# Soundtrack:
-# Notes:
 
 #' A class for 
 #'
@@ -15,19 +16,24 @@
 #' 
 #' @name FLCLASS
 #' @rdname FLCLASS
-#' @aliases FLCLASS FLCLASS-methods FLCLASS-class
 #' @docType class
+#' @aliases FLCLASS FLCLASS-methods FLCLASS-class
 #'
 #' @section Slots:
 #'     \describe{
 #'     \item{SLOT}{Neque porro quisquam est qui dolorem ipsum (\code{SLOTCLASS}).}
 #' }
 #'
-#' @section Validity: \describe{
+#' @section Validity:
+#'
+#'   \describe{
 #'     \item{VALIDITY}{Neque porro quisquam est qui dolorem ipsum.}
 #' }
 #'
-#' @section Accesors:
+#' You can inspect the class validity function by using
+#'    \code{getValidity(getClassDef('FLCatch'))}
+#'
+#' @section Accessors:
 #' All slots in the class have accessor and replacement methods defined that
 #' allow retrieving and substituting individual slots.
 #'
@@ -41,6 +47,13 @@
 #' any of its slots. All slots are then created to match the requirements of the
 #' class validity. If an unnamed \code{FLQuant} object is provided, this is used
 #' for sizing but not stored in any slot.
+#'
+#' @section Methods:
+#' Methods exist for various calculations based on values stored in the class:
+#'
+#' \describe{
+#'     \item{METHOD}{Neque porro quisquam est qui dolorem ipsum.}
+#' }
 #'
 #' @author The FLR Team
 #' @seealso \link{FLComp}
