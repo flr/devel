@@ -1,0 +1,20 @@
+Package: 
+Title: 
+Version: 
+Date: 
+Authors@R: c(person(given = '', family = '', role = c('aut'),
+            email = ''))
+Maintainer: 
+Description: 
+Depends:
+  methods,
+  FLCore
+Imports:
+Additional_repositories: http://flr-project.org/R
+VignetteBuilder: knitr
+License: 
+LazyLoad: Yes
+LazyData: No
+BugReports: https://github.com/XX/XX/issues
+Suggests:
+    testthat
