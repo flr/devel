@@ -4,9 +4,10 @@ PKGDATE := $(shell sed -n "s/Date: *\([^ ]*\)/\1/p" DESCRIPTION)
 PKGSRC  := $(shell basename `pwd`)
 
 R_FILES := $(wildcard $(PKGSRC)/R/*.R)
+VIGNETTE_FILES := $(wildcard $(PKGSRC)/vignette/*.Rmd)
 HELP_FILES := $(wildcard $(PKGSRC)/man/*.Rd)
 
-.PHONY: all clean
+.PHONY: all clean vignette
 
 all: NEWS README.md roxygen build
 
@@ -26,6 +27,9 @@ NEWS: NEWS.md
 roxygen: $(R_FILES)
 	R --vanilla --silent -e "library(devtools);" \
 		-e "document(roclets='rd')"
+
+vignette: $(VIGNETTE_FILES)
+	R CMD Sweave --engine=knitr::rmarkdown $(VIGNETTE_FILES)
 
 build:
 	cd ..;\
