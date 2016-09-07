@@ -1,8 +1,8 @@
 # FLPKG
 - Version: 0.0.0
 - Date: 0001-01-01
-- Author: Somebody
-- Maintainer: Somebody else <me@my.com>
+- Author: %USER%
+- Maintainer: %USER2% <me@my.com>
 - Repository: <https://github.com/flr/FLPKG/>
 - Bug reports: <https://github.com/flr/FLPKG/issues>
 
@@ -28,7 +28,7 @@ or download from the [FLPKG releases page](https://github.com/flr/FLPKG/releases
 - [All release](https://github.com/flr/FLPKG/releases/)
 
 ## License
-Copyright (c) 2014 Somebody. Released under the [GPL v2](http://www.gnu.org/licenses/gpl-2.0.html).
+Copyright (c) %YEAR% Somebody. Released under the [%LICENCE%](%LICENCEURL%).
 
 ## Contact
 You are welcome to:
