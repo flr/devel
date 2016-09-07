@@ -23,20 +23,21 @@ Create at least one vignette, presenting some example uses of the package capabi
 
 ## /data
 
-# SUGGESTED WORKFLOWS
+## tests/testthat
+
+# WORKFLOWS
 
 ## Create new package (or make existing one follow this style)
 
 - EDIT DESCRIPTION
 - ADD NAMESPACE
-- ADD R/*.R files
-
+- ADD R files following templates for roxygen documentation
 - EDIT README.md
 - EDIT inst/CITATION
 
 ## Add new code / fix a bug
 
-- CHANGE code in R/*.R
+- CHANGE code in R files
 - ADD entry in NEWS.md
 - RUN 'make test' and check test passes
 - git add -A .
@@ -49,7 +50,7 @@ Create at least one vignette, presenting some example uses of the package capabi
 
 ## Add or alter roxygen documentation
 
-- CHANGE entry in R/*.R file(s)
+- CHANGE entry in R file(s)
 - Run 'make roxygen'
 - Run 'make gh-pages'
 - git add -A .
@@ -75,3 +76,14 @@ Create at least one vignette, presenting some example uses of the package capabi
 	
 	git commit -a -m "First gh-pages commit"
 	git push origin gh-pages
+
+# PKG CHECKLIST
+
+- COPY folder and rename as per package name
+- EDIT DESCRIPTION
+    - Version: You can follow [Hadley Wickam's format](http://r-pkgs.had.co.nz/description.html#version)
+    - 
+
+# MORE INFO
+
+- [R packages](http://r-pkgs.had.co.nz/)

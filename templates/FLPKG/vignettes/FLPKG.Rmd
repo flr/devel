@@ -19,9 +19,14 @@ library(FLCore)
 # LOAD other packages, including FLPKG, here
 ```
 
+**FLPKG** is an open-source R package that imnplements/provides ... It makes use of the S4 classes and 
+methods developed by the **FLR** project (<http://flr-project.org/R>, [@FLR_KellMG2007]), which simplify the development, testing and use of statistical and simulation models for fisheries management advice.
+[...]
+The package and documentation are available at <http://flr-project.org/FLPKG>.
+
 # Introduction
 
-[@FLR_KellMG2007]
+
 
 # Background / Methods
 

@@ -11,7 +11,7 @@ Depends:
   FLCore
 Imports: 
 Additional_repositories: http://flr-project.org/R
-Suggests: Suggests:
+Suggests:
     testthat,
     knitr,
     rmarkdown
