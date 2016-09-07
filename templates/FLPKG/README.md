@@ -20,7 +20,8 @@ or download from the [FLPKG releases page](https://github.com/flr/FLPKG/releases
 - Vignette
 
 ## Build Status
-[![Build Status](https://travis-ci.org/flr/FLPKG.svg?branch=master)](https://travis-ci.org/flr/FLPKG)
+[![Travis Build Status](https://travis-ci.org/flr/FLPKG.svg?branch=master)](https://travis-ci.org/flr/FLPKG)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/flr/FLPKG?branch=master&svg=true)](https://ci.appveyor.com/project/flr/FLPKG)
 
 ## Releases
 - [Latest release](https://github.com/flr/FLPKG/releases/tag/)

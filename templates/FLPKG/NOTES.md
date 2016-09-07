@@ -1,7 +1,7 @@
 ---
-title: FLPKG CHECKLIST
+title: FLPKG NOTES
 author: Iago Mosqueira, EC JRC G03
-rights:  Creative Commons Share Alike 4.0
+license: Creative Commons Attribution-ShareAlike 4.0 International
 ---
 
 # Package structure
@@ -13,11 +13,17 @@ rights:  Creative Commons Share Alike 4.0
 - Makefile
 - CITATION
 
-# Vignette
+## Vignette
 
-# /data
+Create at least one vignette, presenting some example uses of the package capabilities and, if neccessary, briefly documenting the new classes and methods in the package.
 
-# WORKFLOWS
+- [rmarkdown package_vignette format](http://rmarkdown.rstudio.com/package_vignette_format.html)
+- [rmarkdown html_document format](http://rmarkdown.rstudio.com/html_document_format.html)
+- [Bibliographies and Citations](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
+
+## /data
+
+# SUGGESTED WORKFLOWS
 
 ## Create new package (or make existing one follow this style)
 

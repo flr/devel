@@ -8,7 +8,7 @@ HELP_FILES := $(wildcard $(PKGSRC)/man/*.Rd)
 
 .PHONY: all clean
 
-all: NEWS README.md
+all: NEWS README.md roxygen build
 
 README.md: DESCRIPTION
 	sed -i 's/Version: *\([^ ]*\)/Version: $(PKGVERS)/' README.md

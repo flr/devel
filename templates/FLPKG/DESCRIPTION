@@ -9,12 +9,14 @@ Description:
 Depends:
   methods,
   FLCore
-Imports:
+Imports: 
 Additional_repositories: http://flr-project.org/R
+Suggests: Suggests:
+    testthat,
+    knitr,
+    rmarkdown
 VignetteBuilder: knitr
 License: 
 LazyLoad: Yes
 LazyData: No
 BugReports: https://github.com/XX/XX/issues
-Suggests:
-    testthat
