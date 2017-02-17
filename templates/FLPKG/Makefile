@@ -9,7 +9,7 @@ GITVERS=$(shell (date -d `git log -1 --date=short --pretty=format:"%ad"` +%Y%m%d
 R_FILES := $(wildcard $(PKGSRC)/R/*.R)
 HELP_FILES := $(wildcard $(PKGSRC)/man/*.Rd)
 
-all: build docs
+all: build
 
 .PHONY: all
 
@@ -22,11 +22,7 @@ NEWS: NEWS.md
 	sed -i 's/^##//' NEWS
 
 docs: $(HELP_FILES) README.md NEWS
-#	R --vanilla --silent -e "options(repos='http://cran.r-project.org'); pkgdown::build_site(preview=FALSE)"
-	R --vanilla --silent -e "options(repos='http://cran.r-project.org')" \
-		-e "pkgdown::build_home()" \
-		-e "pkgdown::build_reference()" \
-		-e "pkgdown::build_news()"
+R --vanilla --silent -e "options(repos='http://cran.r-project.org'); pkgdown::build_site(preview=FALSE)"
 
 roxygen: $(R_FILES)
 	R --vanilla --silent -e "library(devtools);" \
@@ -43,7 +39,7 @@ install: build
 	cd ..;\
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
 
-check: build
+check: roxygen README.md docs build
 	cd ..;\
 	R CMD check $(PKGNAME)_$(PKGVERS).tar.gz --as-cran
 
