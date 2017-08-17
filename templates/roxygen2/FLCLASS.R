@@ -5,7 +5,7 @@
 # Author: %USER% <%EMAIL%>
 #
 # Distributed under the terms of the %LICENSE%
-# Copyright 2003-2014 FLR Team. Distributed under the GPL 2 or later
+# Copyright %YEAR% %USER%. Distributed under the GPL 2 or later
 
 #' A class for 
 #'
@@ -19,10 +19,7 @@
 #' @docType class
 #' @aliases FLCLASS FLCLASS-methods FLCLASS-class
 #'
-#' @section Slots:
-#'     \describe{
-#'     \item{SLOT}{Neque porro quisquam est qui dolorem ipsum (\code{SLOTCLASS}).}
-#' }
+#' @slot SLOT Neque porro quisquam est qui dolorem ipsum, `CLASS`.
 #'
 #' @section Validity:
 #'

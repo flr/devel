@@ -6,15 +6,13 @@
 # Soundtrack:
 # Notes:
 
-#' A method for
+#' Title: A method for
 #'
-#' Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend
+#' Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend
 #' odio ac rutrum luctus. Aenean placerat porttitor commodo. Pellentesque eget porta
 #' libero. Pellentesque molestie mi sed orci feugiat, non mollis enim tristique. 
-#' Suspendisse eu sapien vitae arcu lobortis ultrices vitae ac velit. Curabitur id 
-#' nunc euismod ante fringilla lobortis. Aliquam ullamcorper in diam non placerat. 
 #'
-#' Aliquam sagittis feugiat felis eget consequat. Praesent eleifend dolor massa, 
+#' Details: Aliquam sagittis feugiat felis eget consequat. Praesent eleifend dolor massa, 
 #' vitae faucibus justo lacinia a. Cras sed erat et magna pharetra bibendum quis in 
 #' mi. Sed sodales mollis arcu, sit amet venenatis lorem fringilla vel. Vivamus vitae 
 #' ipsum sem. Donec malesuada purus at libero bibendum accumsan. Donec ipsum sapien, 
