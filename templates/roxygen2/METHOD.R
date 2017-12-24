@@ -14,7 +14,7 @@
 #' @aliases METHOD METHOD-methods
 #'
 #' @author The FLR Team
-#' @seealso [`FLQuant`]
+#' @seealso [pkg::func()]
 #' @keywords methods
 #' @md
 #' @examples
