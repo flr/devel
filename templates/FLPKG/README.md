@@ -13,7 +13,7 @@ To install this package, start R and enter:
 
 	install.packages("FLPKG", repos="http:///flr-project.org/R")
 
-or download from the [FLPKG releases page](https://github.com/flr/FLPKG/releases/)
+or download from the [FLR releases page](https://github.com/flr/R/releases)
 
 ## Documentation
 - [Help pages](http://flr-project.org/FLPKG)
@@ -24,8 +24,8 @@ or download from the [FLPKG releases page](https://github.com/flr/FLPKG/releases
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/flr/FLPKG?branch=master&svg=true)](https://ci.appveyor.com/project/flr/FLPKG)
 
 ## Releases
-- [Latest release](https://github.com/flr/FLPKG/releases/tag/)
-- [All release](https://github.com/flr/FLPKG/releases/)
+- [Latest release](https://github.com/flr/R/releases/latest)
+- [All releases](https://github.com/flr/R/releases/)
 
 ## License
 Copyright (c) %YEAR% Somebody. Released under the [%LICENCE%](%LICENCEURL%).

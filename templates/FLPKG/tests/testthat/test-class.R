@@ -6,6 +6,20 @@
 #
 # Distributed under the terms of the %LICENSE%
 
+# CONTEXT
+context("")
+
+# TEST
+test_that("", {
+
+  # EXPECT
+  expect_()
+
+})
+
+
+# ---
+
 # CONTEXT class
 context("CLASS")
 

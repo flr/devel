@@ -1,0 +1,5 @@
+SHLIB_CXXLDFLAGS = -Wl,-S -shared
+SHLIB_CXX11LDFLAGS = -Wl,-S -shared
+SHLIB_CXX14LDFLAGS = -Wl,-S -shared
+SHLIB_FCLDFLAGS = -Wl,-S -shared
+SHLIB_LDFLAGS = -Wl,-S -shared
