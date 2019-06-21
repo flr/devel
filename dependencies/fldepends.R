@@ -11,25 +11,29 @@
 
 library("miniCRAN")
 
-#
-pkgs <- c("FLCore", "ggplotFL", "FLa4a", "FLXSA", "FLAssess", "kobe", "FLSAM",
-  "diags", "FLash", "FLBRP")
+# LIST FLR pkgs
+pkgs <- c("FLCore", "ggplotFL", "FLa4a", "FLXSA", "FLAssess", "FLSAM", "FLasher",
+  "FLBRP", "FLFishery", "mpb", "FLife", "FLFleet", "FLBEIA")
 
-pkgs <- c("FLCore", "ggplotFL", "FLa4a", "FLXSA", "FLAssess", "FLSAM", "FLash",
-  "FLBRP", "FLFishery", "mpb", "FLife")
-
-#
-deps <- lapply(pkgs, pkgDep)
-
+# GET dependencies
+deps <- lapply(pkgs, pkgDep, suggests=FALSE, enhances=FALSE)
 names(deps) <- pkgs
 
-#
-pkgDep(pkgs, repos="http://flr-project.org/R")
+# FROM repo
+deps <- pkgDep(pkgs, repos="http://flr-project.org/R")
 
-dg <- makeDepGraph(pkgs, enhances=TRUE)
+# FLR only
+deps <- lapply(deps, function(x) x[x %in% pkgs])
+
+     availPkgs <- pkgAvail(
+       repos = "http://flr-project.org/R",
+       type = "source"
+       )
+
+# PLOT
+dg <- makeDepGraph(pkgs, availPkgs=availPkgs)
 
 plot(dg, legendPosition = c(-1, -1), vertex.size=10, cex=0.7)
 
 pdf(file='deps.pdf', paper="a4r", height="19cm", width="28")
-
 dev.off()
