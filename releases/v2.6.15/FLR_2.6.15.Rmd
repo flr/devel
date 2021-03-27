@@ -1,0 +1,225 @@
+---
+title: "What is new in FLR 2.6.15"
+subtitle: "A brief walk through the 2.6.15 release of FLR"
+date_subtitle: May 2020
+author:
+  - name: Iago MOSQUEIRA (WMR)
+    affiliation: WMR
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  tint::tintPdf
+papersize: a4
+link-citations: yes
+footer_contents: "FLR 2.6.15 - What is new"
+doi_footer: "https://flr-project.org"
+header_includes:
+  - \usepackage[labelformat=empty]{caption}
+tags: [FLR 2.6.15 FLCore]
+abstract:
+license: Creative Commons Attribution-ShareAlike 4.0 International Public License
+---
+
+```{r, knitr, echo=FALSE, message=FALSE}
+library(knitr)
+opts_chunk$set(echo=TRUE, message=FALSE, warning=FALSE, cache=TRUE,
+  fig.width=4.5, fig.height=4)
+```
+
+A release of [FLR](https://flr-project.org/) packages is now on the FLR repository, with binary packages being made available for R version 4.0.0. What is new in the FLR packages being released? This is a brief introduction, including example code, of the main developments and changes that can be found on a number of the FLR packages.
+
+# FLCore 2.6.15
+
+```{r flcore, echo=FALSE}
+library(FLCore)
+data(ple4)
+library(ggplotFL)
+```
+
+## divide() separates object along iters into list.
+
+An object with *iters* can be turned into a list, where each element comes from one of the object iters.
+
+```{r divide}
+# An FLQuant with 5 iterations
+flq <- FLQuant(rep(seq(1, 5), each=40),
+  dimnames=list(age=1:4, year=1:10, iter=1:5))
+
+# Check iter 1
+iter(flq, 1)
+
+# divide()
+dflq <- divide(flq)
+
+# Check element 1
+dflq[[1]]
+
+# Result is an FLlst, in this case
+is(dflq)
+
+```
+
+## fwd(FLQuant) and fwd(FLStock) to move one year forward.
+
+Survivors can be simply calculated and projected forward one year, either for a single population vector (as an `FLQuant`) or a whole stock (`FLStock`). In the first case, abundances are move forward one year and age, without any mortality. This is still useful when those abundances are already at the end of year. In the second case natural and fishing mortality is applied. In both cases the last age is treated as a plusgroup, and a value for recruitment can provided using argument `rec`.
+
+```{r fwd}
+# Get a single population abundance vector
+naa <- stock.n(ple4)[,"2000"]
+fwd(naa, rec=6.34e5)
+
+# Extract a single year of ple4
+test <- ple4[, "2000"]
+
+# Bring it forward
+ftest <- fwd(test, rec=rec(ple4)[,"2001"])
+
+# stock.n from ple4 and fwd are almost identical
+all.equal(stock.n(ftest), stock.n(ple4)[, "2001"])
+```
+
+## `mohnMatrix()` to construct a table of metrics to compute Mohn's rho
+
+The `icesAdvice`[^1] package already provides a function to calculate Mohn's rho retrospective metric, from a matrix of years and retro peels. This matrix can be generated from the results of a retrospective analaysis, stored as an `FLstocks` object, by using `mohnMatrix`. A metric to compute the matrix for must be selected, as a function or function name, and defaults to F (`fbar`).
+
+[^1]: <https://github.com/ices-tools-prod/icesAdvice>
+
+```{r mohnmatrix_prep, echo=FALSE, results='hide'}
+library(FLXSA)
+data(ple4)
+data(ple4.index)
+
+years <- seq(2017, length=6, by=-1)
+retro <- lapply(years, function(x) {
+  print(x)
+  FLXSA(window(ple4, end=x), window(ple4.index, end=x)) + window(ple4, end=x)
+  }
+)
+names(retro) <- years
+```
+
+```{r retro, fig.cap="`retro` is an FLStocks of FLXSA runs, 5 peels of one year less at a time.", fig.margin = TRUE, echo=FALSE}
+plot(FLStocks(retro)) + theme(legend.position="none")
+```
+
+```{r mohnmatrix}
+# mohnMatrix returns the years * peel matrix
+mohnMatrix(retro, metric=ssb)
+
+# to use with icesAdvice::mohn
+icesAdvice::mohn(mohnMatrix(retro, metric="ssb"))
+```
+
+## `standardUnits` provides a set of standard units of measurement
+
+All slots in an `FLStock` can be set to have a set of standard units of measurement by setting, using `units<-`, the result of this method. The standard for asn `FLStock` is to use `1000` for number in thousands, `kg` for weights, `t` for biomass, `m` and `f` for nruital and fishing mortality, and an empty string for proportions, such as `mat`, `m.spwn`, and `harvest.spwn`.
+
+```{r standardunits}
+# Create an FLStock, no units in slots
+fls <- FLStock(m=FLQuant(0.2,
+  dimnames=list(age=1:4, year=2010:2018)))
+
+# Get standard units for this class, and assign 
+units(fls) <- standardUnits(fls)
+```
+
+## `window()` accepts a negative value as `end`
+
+When shortening an object using `window`, a number of years can now be dropped uisng a negavive number of the `end` argument value.
+
+```{r negative}
+# Drop last 3 years
+window(FLQuant(seq(1:8)), end=-3)
+```
+
+## `append()` to add an object after another along the `year` dimension
+
+A single `FLQuant` or a whole `FLStock` can be extended in time with another object using `append()`. `year` dimnames are used to match both objects so no `year` is repeated. Shared `year` dimensions will be taken from the appended object, its second argument. If a gap exists, `NA` will appear.
+
+```{r append}
+# Append two objects with contiguous years
+append(stock(ple4)[,ac(2005:2006)],
+  stock(ple4)[,ac(2007:2008)])
+
+# Years clash, so values taken from second
+append(stock(ple4)[,ac(2005:2006)],
+  stock(ple4)[,ac(2006:2007)] / 1000)
+
+# Gap in years, so left empty
+append(stock(ple4)[,ac(2005:2006)],
+  stock(ple4)[,ac(2008:2009)])
+```
+
+## residuals methods
+
+Calculation of residuals can now be carried out using different methods but under a common interface. The alternative residuals currently available are:
+
+- Log-standardized, using method `rlogstandard()`
+- Pearson, by calling `rstandard()`
+- Studentized, using `rstudent()`
+
+All of them requyire the observation ads first argument and the model fit as the second. In addition, standardized residuals need the standard deviation. If not supplied, it is calculated along the `year` dimension.
+
+A call to `residuals()` will give you access to those methods, selected through the `type` argument.
+
+```{r residuals_prep, echo=FALSE, results="hide"}
+library(FLa4a)
+res <- sca(ple4, FLIndices(I=ple4.index))
+obs <- catch.n(ple4)[1:5, ac(2007:2010)]
+fit <- catch.n(res)[1:5, ac(2007:2010)]
+```
+
+```{r bubbleplot, fig.cap="Example of log standardized residuals.", fig.margin=TRUE, echo=FALSE}
+ggplot(residuals(obs, fit, type="log"),
+  aes(x=year, y=factor(age), size=abs(data),
+  fill=factor(sign(data)))) +
+  scale_size(range = c(0.1, 16)) +
+  geom_point(shape=21) + xlab("") + ylab("Age") +
+  scale_fill_manual(values = c("white", "grey90"), na.translate = F) +
+  theme(legend.position="none")
+```
+
+```{r residuals}
+residuals(obs, fit, type="log")
+```
+
+## `metrics()` can now process formulas combining functions and `FLPar`
+
+The `metrics()` method computes metrics from complex objects and simplifies extracting values from, for example, an `FLStock`.
+
+```{r metrics, fig.cap="ssb() and rec() extracted using metrics()", fig.margin=TRUE}
+mets <- metrics(ple4, list(SB=ssb, REC=rec))
+plot(mets)
+```
+
+Those metrics can now be defined to include a named numeric vector or an `FLPar`, for example a reference point. Names in the formula and the object need to match.
+
+```{r metricsflpar, fig.cap="$SB/B_{MSY}$ and $F/F_{MSY}$ as computed from a call to metrics. as shown.", fig.margin=TRUE}
+mets <- metrics(ple4, list(SB=~ssb / Bmsy,
+  F=~fbar / Fmsy), FLPar(Bmsy=3.5e5, Fmsy=0.32))
+plot(mets) + geom_hline(yintercept=1, linetype=2)
+```
+
+## `intersect()` method called on two FLQuants subsets to common dimension names.
+
+The common dimensions of two `FLQuant` objects can now be used to subset them at the same time by calling `intercept`. The method works on dimension names to find the matching sections on the objects. We can then operate on them in m, nay ays, as their dimensions match.
+
+```{r intersect}
+# Objcts with mismatching aged and years
+fq1 <- FLQuant(2, dimnames=list(age=0:3,
+  year=2015:2019))
+fq2 <- FLQuant(5, dimnames=list(age=2:6,
+  year=2016:2019))
+
+# An FLQuants object with the subset inputs
+intersect(fq1, fq2)
+```
+
+## Other changes in FLCore 2.6.15
+
+- `readVPAInterCatch()` creates an FLQuant from a VPA file in the format exported by ICES Intercatch system.
+
+# ggplotFL
+
+# FLa4a
+
+# mse
